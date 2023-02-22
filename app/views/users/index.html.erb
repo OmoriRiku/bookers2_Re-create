@@ -3,7 +3,7 @@
     <div class="col-md-3">
       <%= render 'form', user: @user %>
       <div class="row">
-        <%= link_to user_path(@user), class: "btn btn-block btn-outline-secondary" do %>
+        <%= link_to edit_user_path(@user), class: "btn btn-block btn-outline-secondary" do %>
           <i class="fas fa-user-cog"></i>
         <% end %>
       </div>
