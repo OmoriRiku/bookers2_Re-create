@@ -1,2 +1,30 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-3">
+      <%= render 'form', user: @user %>
+      <div class="row">
+        <%= link_to user_path(@user), class: "btn btn-block btn-outline-secondary" do %>
+          <i class="fas fa-user-cog"></i>
+        <% end %>
+      </div>
+      <%= render 'index', book: @book %>
+    </div>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <td>
+              <%= link_to user_path(@user) do %>
+                <%= image_tag @user.get_profile_image(100,100) %><br />
+                <%= @user.name %>
+              <% end %>
+            </td>
+            <td><%= link_to @book_show.title, book_path(@book_show) %></td>
+            <td><%= @book_show.body %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
