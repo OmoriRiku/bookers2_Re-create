@@ -58,10 +58,7 @@
           <% end %>
         </tbody>
       </table>
-      <%= form_with model: [@book_show, @book_comment] do |f| %>
-        <%= f.text_area :comment, rows: "5", class: "form-control" %>
-        <%= f.submit "送信" %>
-      <% end %>
+      <%= render 'book_comments/form', book: @book_show, book_comment: @book_comment %>
     </div>
   </div>
 </div>
