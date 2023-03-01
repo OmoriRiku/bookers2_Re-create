@@ -11,7 +11,7 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-          <td><%= image_tag user.get_profile_image, size: "100x100" %></td>
+          <td><%= image_tag user.get_profile_image(100,100) %></td>
           <td><%= user.name %></td>
           <td><%= link_to "show", user_path(user) %></td>
         </tr>
@@ -29,7 +29,7 @@
     <tbody>
       <% @books.each do |book| %>
         <tr>
-          <td><%= image_tag book.user.get_profile_image, size: "100x100" %></td>
+          <td><%= image_tag book.user.get_profile_image(100,100) %></td>
           <td><%= book.title %></td>
           <td><%= book.body %></td>
         </tr>

@@ -12,6 +12,8 @@ class SearchesController < ApplicationController
       @books = Book.looks(params[:search], params[:word])
       @word = params[:word]
     end
+
+    render 'searches/searches'
   end
 
 end

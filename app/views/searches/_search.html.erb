@@ -1,10 +1,14 @@
 <div class="container">
   <div class="row text-center d-block">
-    <%= form_with url:searches_path do |f| %>
+  <% if user_signed_in? %>
+  <div class="search_form">
+    <%= form_with url: searches_path, local: true, method: :get do |f| %>
       <%= f.text_field :word %>
-      <%= f.select :models, [ [ "User" , "User" ], [ "Book", "Book" ] ] %>
-      <%= f.select :search, [ [ "完全一致", "perfect" ], [ "前方一致", "forward" ], [ "後方一致", "backward" ], [ "部分一致", "partial" ] ] %>
-      <%= f.submit "検索する" %>
+      <%= f.select :range, options_for_select([["User"], ["Book"]]) %>
+      <%= f.select :search, options_for_select({ "完全一致" => "perfect", "前方一致" => "forward", "後方一致" => "backward", "部分一致" => "partial" }) %>
+      <%= f.submit '検索', class: "btn btn-primary" %>
     <% end %>
+  </div>
+<% end %>
   </div>
 </div>
