@@ -14,23 +14,25 @@ class User < ApplicationRecord
   has_many :book_comments, dependent: :destroy
 
   ## 中間テーブルrelationships(フォローする)とreverse_of_relationships(フォローされる)を作成
-  ## Relationshipモデルから外部キーfollower_idを参照にしてrelationshipsという名前の中間テーブルを作成する
+  ## Relationshipモデルから外部キーfollower_idを参照にしてrelationshipsという名前の架空のテーブルを作成する
   has_many :relationships, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  ## Relationshipモデルから外部キーfollowed_idを参照にしてreverse_of_relationshipsという名前の中間テーブルを作成する
+  
+  ## Relationshipモデルから外部キーfollowed_idを参照にしてreverse_of_relationshipsという名前の架空のテーブルを作成する
   has_many :reverse_of_relationships, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
 
   ## 一覧ページで使う
-  ## followingsという名前で中間テーブルを飛ばしてrelationship.rbファイルのfollowedを参照する
+  ## followingsという名前で架空のテーブルを飛ばしてrelationship.rbファイルのfollowedを参照する
   has_many :followings, through: "relationships", source: :followed
-  ## followersという名前で中間テーブルを飛ばしてrelationship.rbファイルのfollowerを参照する
+
+  ## followersという名前で架空のテーブルを飛ばしてrelationship.rbファイルのfollowerを参照する
   has_many :followers,  through: "reverse_of_relationships", source: :follower
 
-  ## フォローする(指定した引数user_idからfollowed_idに対して値を生成する（0 → １）)
+  ## フォローする(指定した引数user_idからfollowed_idに対して値を生成する（1人のユーザーが誰かをフォローしたという情報をidで生成する。)
   def follow(user_id)
     relationships.create(followed_id: user_id)
   end
 
-  ## フォロー解除する(指定した引数user_idからfollowed_idの値を参照して削除する(1 → 0))
+  ## Relationshipのidを削除する
   def unfollow(user_id)
     relationships.find_by(followed_id: user_id).destroy
   end

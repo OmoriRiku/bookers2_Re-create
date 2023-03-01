@@ -1,9 +1,9 @@
 class FavoritesController < ApplicationController
 
   def create
-    ## 投稿している情報をIDから取得する
+    ##　本の投稿のIDをURLから取得する。
     book = Book.find(params[:book_id])
-    ## ログインしているユーザーが投稿したIDを参照にインスタンスを生成する
+    ## ログインしているユーザーのFavoriteテーブルからいいねする投稿のIDのインスタンスを生成する。
     favorite = current_user.favorites.new(book_id: book.id)
     ## いいねする
     favorite.save
@@ -12,9 +12,9 @@ class FavoritesController < ApplicationController
   end
 
   def destroy
-    ## 投稿している情報をIDから取得する
+    ## 本の投稿のIDをURLから取得する。
     book = Book.find(params[:book_id])
-    ## ログインしているユーザーが投稿されたものにいいねしているか検索する
+    ## ログインしているユーザーのFavoriteテーブルからいいねした投稿のIDを取得する。
     favorite = current_user.favorites.find_by(book_id: book.id)
     ## いいねを削除する
     favorite.destroy
