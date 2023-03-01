@@ -1,0 +1,10 @@
+<div class="container">
+  <div class="row text-center d-block">
+    <%= form_with url:searches_path do |f| %>
+      <%= f.text_field :word %>
+      <%= f.select :models, [ [ "User" , "User" ], [ "Book", "Book" ] ] %>
+      <%= f.select :search, [ [ "完全一致", "perfect" ], [ "前方一致", "forward" ], [ "後方一致", "backward" ], [ "部分一致", "partial" ] ] %>
+      <%= f.submit "検索する" %>
+    <% end %>
+  </div>
+</div>
